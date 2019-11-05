@@ -10,8 +10,7 @@ external_stylesheets = [ dbc.themes.BOOTSTRAP, 'https://codepen.io/almostburtmac
 
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-ScoutApm(app)
-server = app.server
 app.config.suppress_callback_exceptions = True
-app.config["SCOUT_NAME"] = "Baseball App"
-
+flask = app.server
+ScoutApm(flask)
+flask.config["SCOUT_NAME"] = "Baseball App"
