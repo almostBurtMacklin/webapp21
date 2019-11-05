@@ -73,7 +73,7 @@ def counts(s,b,hand,pitcher):
             j += 1
         i += 1
     
-    
+    pitches = pd.DataFrame()
     return final
 b = ['0.0','1.0','2.0','3.0']
 s = ['0.0','1.0','2.0']
@@ -229,6 +229,10 @@ def update_figure(input1, input2, input3, input4, input5):
     df13 = df13.append(df4)
     #for k in input3:    
     df5 = df13.query('s_count == @input4')
+    df11 = pd.DataFrame()
+    df12 = pd.DataFrame()
+    df13 = pd.DataFrame()
+    df14 = pd.DataFrame()
     Final = Final.append(df5)
     
     print(Final.shape)
