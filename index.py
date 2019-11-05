@@ -34,7 +34,7 @@ from apps import pit
 from apps import lad
 from apps import sdp
 from apps import sfg
-froom apps import ari
+from apps import ari
 from apps import col
 
 app.layout = html.Div([
