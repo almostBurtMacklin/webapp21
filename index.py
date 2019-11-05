@@ -4,7 +4,6 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 from app import app
-from app import server
 from apps import pitch
 from apps import first
 ##from apps import bal
