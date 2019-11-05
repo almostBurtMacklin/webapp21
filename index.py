@@ -5,37 +5,36 @@ from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 from app import app
 from apps import pitch
-from apps import first
 from apps import bal
 from apps import nyy
 from apps import tbr
 from apps import bos
 from apps import tor
 from apps import mins
-#from apps import cle
-#from apps import chw
-#from apps import kcr
-#from apps import det
-#from apps import hou
-#from apps import oak
-#from apps import tex
-#from apps import laa
-#from apps import sea
-#from apps import atl
-#from apps import wsn
-#from apps import phi
-#from apps import nym
-#from apps import mia
-#from apps import stl
+from apps import cle
+from apps import chw
+from apps import kcr
+from apps import det
+from apps import hou
+from apps import oak
+from apps import tex
+from apps import laa
+from apps import sea
+from apps import atl
+from apps import wsn
+from apps import phi
+from apps import nym
+from apps import mia
+from apps import stl
 from apps import mil
-#from apps import chc
-#from apps import cin
-#from apps import pit
-#from apps import lad
-#from apps import sdp
-#from apps import sfg
+from apps import chc
+from apps import cin
+from apps import pit
+from apps import lad
+from apps import sdp
+from apps import sfg
 from apps import ari
-#from apps import col
+from apps import col
 
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
@@ -46,9 +45,7 @@ app.layout = html.Div([
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
-    if pathname == '/first':
-        return first.layout
-    elif pathname == '/pitch':
+    if pathname == '/pitch':
         return pitch.layout
     elif pathname == '/bal':
         return bal.layout
@@ -111,7 +108,7 @@ def display_page(pathname):
     elif pathname == '/col':
         return col.layout
     else:
-        return first.layout
+        return pitch.layout
 
 
 if __name__ == '__main__':
