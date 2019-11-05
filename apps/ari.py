@@ -13,7 +13,7 @@ import base64
 import dash_bootstrap_components as dbc
 
 
-df = pd.read_csv('data/ari.csv', dtype={'b_count': str, 's_count' : str, 'pitcher_id' : 'category', 'pitch_type' : 'category' })
+df = pd.read_csv('data/ari.csv', dtype={'b_count': 'category', 's_count' : 'category', 'pitcher_id' : 'category', 'pitch_type' : 'category', 'stand': 'category' })
 
 teamColor = [[0, "#fff"],
                 [0.25, "#f4d4d1"],
