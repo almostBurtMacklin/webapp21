@@ -13,21 +13,20 @@ import base64
 import dash_bootstrap_components as dbc
 
 
-df = pd.read_csv('data/mil.csv', dtype={'b_count': str, 's_count' : str})
+df = pd.read_csv('data/mil.csv', dtype={'b_count': 'category', 's_count' : 'category', 'pitcher_id' : 'category', 'pitch_type' : 'category', 'stand': 'category' })
 
 teamColor = [[0, "#fff"],
-                [0.25, "#f0e9d5"],
-                [0.45, "#e1d3ab"],
-                [0.65, "#d3bd81"],
-                [0.85, "#c4a757"],
-                [1, "#b6922e"]]
+                [0.25, "#f4d4d1"],
+                [0.45, "#f5a9a4"],
+                [0.65, "#f17e76"],
+                [0.85, "#ec5349"],
+                [1, "#e8291c"]]
 
-darker = '#0a2351'
-lighter = '#b6922e'
-bright = '#fed141'
+darker = '#1d2d5c'
+lighter = '#134a8e'
+bright = '#e8291c'
 
 features = df.pitcher_id.unique()
-features.sort()
 pitches = df.pitch_type.unique()
 opts = [{'label' : i, 'value' : i} for i in features]
 tops = [{'label' : j, 'value' : j} for j in pitches]
@@ -90,10 +89,10 @@ layout = html.Div([
                         #html.Img(src='data:oriole/jpg;base64,{}'.format(encoded_image.decode()),style ={'width': '99%'}),
                         html.H1("Milwakee Brewers Match Up Chart - Pitcher Tendencies",
                          style = {#'backgroundColor' : '#512888',
-                                 'color': lighter,
+                                 'color': '#e8291c',
                                   'text-align' : 'center',
                                   'height': '50px',
-                                  'text-shadow' : '-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff'}),
+                                  'text-shadow' : '-1px -1px 0 #c4ced3, 1px -1px 0 #c4ced3, -1px 1px 0 #c4ced3, 1px 1px 0 #c4ced3'}),
                         
                         html.P([
                             html.P("Pitcher", style={'color' : 'white'}),
@@ -163,7 +162,7 @@ layout = html.Div([
                         style_cell={'textAlign': 'center'},
                         style_data_conditional=[ {
                                 'if': {'column_id': str(x), 'filter_query': '{{{0}}} > 25 && {{{0}}} < 100'.format(x)},
-                                'color': bright,
+                                'color': 'white',
                                 'backgroundColor' : darker
                             } for x in fin.columns.to_list()
                         ], style_table={'width': '95%'}),
@@ -176,12 +175,12 @@ layout = html.Div([
                         style_cell={'textAlign': 'center'},
                         style_data_conditional=[ {
                                 'if': {'column_id': str(x), 'filter_query': '{{{0}}} > 25 && {{{0}}} < 100'.format(x)},
-                                'color': bright,
+                                'color': 'white',
                                 'backgroundColor' : darker
                             } for x in finR.columns.to_list()
                         ],
                         style_table={'width': '95%'})], className = "six columns")], className = "row")], style={
-                                                                    'backgroundColor' : darker                   
+                                                                    'backgroundColor' : lighter                   
                                                                     },className = "all")
                     
 ##                    html.Div([

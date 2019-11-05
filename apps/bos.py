@@ -13,7 +13,7 @@ import base64
 import dash_bootstrap_components as dbc
 
 
-df = pd.read_csv('data/bos.csv', dtype={'b_count': str, 's_count' : str})
+df = pd.read_csv('data/bos.csv', dtype={'b_count': 'category', 's_count' : 'category', 'pitcher_id' : 'category', 'pitch_type' : 'category', 'stand': 'category' })
 
 teamColor = [[0, "#fff"],
                 [0.25, "#d1d4dd"],
@@ -27,10 +27,11 @@ lighter = '#bd3039'
 bright = '#fff'
 
 features = df.pitcher_id.unique()
-features.sort()
 pitches = df.pitch_type.unique()
 opts = [{'label' : i, 'value' : i} for i in features]
 tops = [{'label' : j, 'value' : j} for j in pitches]
+features = pd.DataFrame()
+pitches = pd.DataFrame()
 balls4 = [{'label' : '0', 'value' : '0.0'},             #increase num
          {'label' : '1', 'value' : '1.0'},
          {'label' : '2', 'value' : '2.0'},
@@ -48,7 +49,6 @@ trace_1 = go.Histogram2d(x = df.px, y = df.pz, colorscale=teamColor)
 layouts = go.Layout(height = 600,
                    width = 600)
 fig4 = go.Figure(data = [trace_1], layout = layouts)    #increase num
-value = opts[0]['value']
 def counts(s,b,hand,pitcher):
     pitches = df.query('pitcher_id == @pitcher').pitch_type.unique()
     j= 0
@@ -230,6 +230,15 @@ def update_figure(input1, input2, input3, input4, input5):
     #for k in input3:    
     df5 = df13.query('s_count == @input4')
     Final = Final.append(df5)
+    df11 = pd.DataFrame()
+    df12 = pd.DataFrame()
+    df13 = pd.DataFrame()
+    df14 = pd.DataFrame()
+    df1 = pd.DataFrame()
+    df2 = pd.DataFrame()
+    df3 = pd.DataFrame()
+    df4 = pd.DataFrame()
+    df5 = pd.DataFrame()
     
     print(Final.shape)
     try:
@@ -303,7 +312,7 @@ def update_table_Left(pitcher, value):
             j += 1
         i += 1
     
-    
+    pitches = pd.DataFrame()
     return final.to_dict('records')
 @app.callback(
     Output('table9', 'data'),       #increase num
@@ -333,7 +342,7 @@ def update_table_Right(pitcher, value):
             j += 1
         i += 1
     
-    
+    pitches = pd.DataFrame()
     return final.to_dict('records')
 @app.callback(
     Output('pitch4', 'options'),        #increase num

@@ -13,7 +13,7 @@ import base64
 import dash_bootstrap_components as dbc
 
 
-df = pd.read_csv('data/ari.csv', dtype={'b_count': 'category', 's_count' : 'category', 'pitcher_id' : 'category', 'pitch_type' : 'category', 'stand': 'category' })
+df = pd.read_csv('data/ari.csv', dtype={'b_count': str, 's_count' : str})
 
 teamColor = [[0, "#fff"],
                 [0.25, "#f4d4d1"],
@@ -27,6 +27,7 @@ lighter = '#134a8e'
 bright = '#e8291c'
 
 features = df.pitcher_id.unique()
+features.sort()
 pitches = df.pitch_type.unique()
 opts = [{'label' : i, 'value' : i} for i in features]
 tops = [{'label' : j, 'value' : j} for j in pitches]
@@ -72,7 +73,7 @@ def counts(s,b,hand,pitcher):
             j += 1
         i += 1
     
-    pitches = pd.DataFrame()
+    
     return final
 b = ['0.0','1.0','2.0','3.0']
 s = ['0.0','1.0','2.0']
@@ -228,10 +229,6 @@ def update_figure(input1, input2, input3, input4, input5):
     df13 = df13.append(df4)
     #for k in input3:    
     df5 = df13.query('s_count == @input4')
-    df11 = pd.DataFrame()
-    df12 = pd.DataFrame()
-    df13 = pd.DataFrame()
-    df14 = pd.DataFrame()
     Final = Final.append(df5)
     
     print(Final.shape)

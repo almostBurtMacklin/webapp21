@@ -13,7 +13,7 @@ import base64
 import dash_bootstrap_components as dbc
 
 
-df = pd.read_csv('data/tbr.csv', dtype={'b_count': str, 's_count' : str})
+df = pd.read_csv('data/tbr.csv', dtype={'b_count': 'category', 's_count' : 'category', 'pitcher_id' : 'category', 'pitch_type' : 'category', 'stand': 'category' })
 
 teamColor = [[0, "rgb(255,255,255)"],
                 [0.25, "rgb(209.4,213.4,222.2)"],
@@ -27,7 +27,6 @@ lighter = '#8fbce6'
 bright = '#f5d130'
 
 features = df.pitcher_id.unique()
-features.sort()
 pitches = df.pitch_type.unique()
 opts = [{'label' : i, 'value' : i} for i in features]
 tops = [{'label' : j, 'value' : j} for j in pitches]

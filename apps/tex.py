@@ -11,9 +11,26 @@ from app import app
 import dash_table
 import base64
 import dash_bootstrap_components as dbc
+from flask_caching import Cache
+
+cache = Cache(app.server, config={
+    'CACHE_TYPE': 'filesystem',
+    'CACHE_DIR': 'cache-directory'
+})
+
+TIMEOUT = 60
+
+@cache.memoize(timeout=TIMEOUT)
+def query_data():
+    df = pd.read_csv('data/tex.csv', dtype={'b_count': 'category', 's_count' : 'category', 'pitcher_id' : 'category', 'pitch_type' : 'category', 'stand': 'category' })
+    return df.to_json(date_format='iso', orient='split')
 
 
-df = pd.read_csv('data/tex.csv', dtype={'b_count': str, 's_count' : str})
+
+def dataframe():
+    return pd.read_json(query_data(), orient='split', dtype={'b_count': 'category', 's_count' : 'category', 'pitcher_id' : 'category', 'pitch_type' : 'category', 'stand': 'category' })
+
+df = dataframe()
 
 teamColor = [[0, "#fff"],
                 [0.25, "#f4d4d1"],
@@ -27,7 +44,6 @@ lighter = '#134a8e'
 bright = '#e8291c'
 
 features = df.pitcher_id.unique()
-features.sort()
 pitches = df.pitch_type.unique()
 opts = [{'label' : i, 'value' : i} for i in features]
 tops = [{'label' : j, 'value' : j} for j in pitches]
@@ -62,12 +78,10 @@ def counts(s,b,hand,pitcher):
         for ba in b:
             res = []
             total = df.query('pitcher_id == @pitcher and b_count == @ba and s_count == @st and stand == @hand').shape[0]
-            
             if total == 0:
                 total = total + 1
             else:
                 total = total
-                
             for value in pitches:
                 res.append(df.query('pitcher_id == @pitcher and b_count == @ba and s_count == @st and pitch_type == @value and stand == @hand').shape[0]
                        /total)
@@ -89,6 +103,7 @@ finR = counts(s,b,'R', opts[0]['value'])
 #encoded_image = base64.b64encode(open(image_filename, 'rb').read())
 
 layout = html.Div([
+    
                 #common.get_header(),
                 common.get_menu(),
                 html.Div([
@@ -218,7 +233,6 @@ layout = html.Div([
     )
                 
 def update_figure(input1, input2, input3, input4, input5):
-    
     Final = pd.DataFrame()
     df11 = pd.DataFrame()
     df12 = pd.DataFrame()
@@ -236,6 +250,10 @@ def update_figure(input1, input2, input3, input4, input5):
     #for k in input3:    
     df5 = df13.query('s_count == @input4')
     Final = Final.append(df5)
+    df11 = pd.DataFrame()
+    df12 = pd.DataFrame()
+    df13 = pd.DataFrame()
+    df14 = pd.DataFrame()
     
     print(Final.shape)
     try:
@@ -298,12 +316,10 @@ def update_table_Left(pitcher, value):
         for ba in b:
             res = []
             total = df.query('pitcher_id == @pitcher and b_count == @ba and s_count == @st and stand == "L"').shape[0]
-            
             if total == 0:
                 total = total + 1
             else:
                 total = total
-                
             for value in pitches:
                 res.append(df.query('pitcher_id == @pitcher and b_count == @ba and s_count == @st and pitch_type == @value and stand == "L"').shape[0]
                        /total)
@@ -334,12 +350,10 @@ def update_table_Right(pitcher, value):
         for ba in b:
             res = []
             total = df.query('pitcher_id == @pitcher and b_count == @ba and s_count == @st and stand == "R"').shape[0]
-            
             if total == 0:
                 total = total + 1
             else:
                 total = total
-            
             for value in pitches:
                 res.append(df.query('pitcher_id == @pitcher and b_count == @ba and s_count == @st and pitch_type == @value and stand == "R"').shape[0]
                        /total)
