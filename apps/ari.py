@@ -342,7 +342,7 @@ def update_dropdown(input1):
     pitchTypes = df.query('pitcher_id == @input1').pitch_type.unique()
     return [{'label' : j, 'value' : j} for j in pitchTypes]
     
-
+gc.collect()
 
 if __name__ == '__main__':
     app.run_server(debug=True)
