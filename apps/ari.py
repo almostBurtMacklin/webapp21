@@ -10,6 +10,7 @@ from apps import common
 from app import app
 import dash_table
 import base64
+import gc
 import dash_bootstrap_components as dbc
 from apps import common
 from app import app
