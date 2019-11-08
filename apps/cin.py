@@ -16,15 +16,15 @@ import dash_bootstrap_components as dbc
 df = pd.read_csv('data/cin.csv', dtype={'b_count': 'category', 's_count' : 'category', 'pitcher_id' : 'category', 'pitch_type' : 'category', 'stand': 'category' })
 
 teamColor = [[0, "#fff"],
-                [0.25, "#f4d4d1"],
-                [0.45, "#f5a9a4"],
-                [0.65, "#f17e76"],
-                [0.85, "#ec5349"],
-                [1, "#e8291c"]]
+                [0.25, "#ccc"],
+                [0.45, "#999"],
+                [0.65, "#666"],
+                [0.85, "#333"],
+                [1, "#000"]]
 
-darker = '#1d2d5c'
-lighter = '#134a8e'
-bright = '#e8291c'
+darker = '#000'
+lighter = '#c6011f'
+bright = '#fff'
 
 features = df.pitcher_id.unique()
 pitches = df.pitch_type.unique()
@@ -42,7 +42,7 @@ scin = [{'label' : '0', 'value' : '0.0'},            #increase num
 bacin = [{'label' : 'Right', 'value' : 'R'},          #increase num
          {'label' : 'Left', 'value' : 'L'}]
 
-trace_1 = go.Histogram2d(x = df.px, y = df.pz, colorscale=teamColor)
+trace_1 = go.Histogram2d()
 
 layouts = go.Layout(height = 600,
                    width = 600)
@@ -89,10 +89,10 @@ layout = html.Div([
                         #html.Img(src='data:oriole/jpg;base64,{}'.format(encoded_image.decode()),style ={'width': '99%'}),
                         html.H1("Cincinnati Reds Match Up Chart - Pitcher Tendencies",
                          style = {#'backgroundColor' : '#512888',
-                                 'color': '#e8291c',
+                                 'color': '#000',
                                   'text-align' : 'center',
                                   'height': '50px',
-                                  'text-shadow' : '-1px -1px 0 #c4ced3, 1px -1px 0 #c4ced3, -1px 1px 0 #c4ced3, 1px 1px 0 #c4ced3'}),
+                                  'text-shadow' : '-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff'}),
                         
                         html.P([
                             html.P("Pitcher", style={'color' : 'white'}),
