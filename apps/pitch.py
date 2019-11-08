@@ -34,12 +34,7 @@ batter = [{'label' : 'Right', 'value' : 'R'},
 outs = [{'label' : '0', 'value' : '0'},
          {'label' : '1', 'value' : '1'},
          {'label' : '2', 'value' : '2'}]
-trace_1 = go.Histogram2d(x = df.px, y = df.pz, colorscale=[[0, "rgb(255,255,255)"],
-                [0.25, "rgb(214,181,226)"],
-                [0.45, "rgb(181,146,196)"],
-                [0.65, "rgb(138,111,166)"],
-                [0.85, "rgb(111,76,179)"],
-                [1, "rgb(82,40,136)"]])
+trace_1 = go.Histogram2d()
 
 layouts = go.Layout(height = 600,
                    width = 600)
