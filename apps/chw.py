@@ -24,7 +24,7 @@ teamColor = [[0, "#fff"],
 
 darker = '#000000'
 lighter = '#C4CEd4'
-bright = '#fffc'
+bright = '#fff'
 
 features = df.pitcher_id.unique()
 pitches = df.pitch_type.unique()
