@@ -18,15 +18,15 @@ from app import app
 df = pd.read_csv('data/ari.csv', dtype={'b_count': str, 's_count' : str})
 
 teamColor = [[0, "#fff"],
-                [0.25, "#f4d4d1"],
-                [0.45, "#f5a9a4"],
-                [0.65, "#f17e76"],
-                [0.85, "#ec5349"],
-                [1, "#e8291c"]]
+                [0.25, "#d5f5f7"],
+                [0.45, "#acebef"],
+                [0.65, "#82e1e7"],
+                [0.85, "#59d7df"],
+                [1, "#30ced8"]]
 
-darker = '#1d2d5c'
-lighter = '#134a8e'
-bright = '#e8291c'
+darker = '#A71930'
+lighter = '#E3D4Ad'
+bright = '#30Ced8'
 
 features = df.pitcher_id.unique()
 features.sort()
@@ -92,10 +92,10 @@ layout = html.Div([
                         #html.Img(src='data:oriole/jpg;base64,{}'.format(encoded_image.decode()),style ={'width': '99%'}),
                         html.H1("Arizona Diamondbacks Match Up Chart - Pitcher Tendencies",
                          style = {#'backgroundColor' : '#512888',
-                                 'color': '#e8291c',
+                                 'color': darker,
                                   'text-align' : 'center',
                                   'height': '50px',
-                                  'text-shadow' : '-1px -1px 0 #c4ced3, 1px -1px 0 #c4ced3, -1px 1px 0 #c4ced3, 1px 1px 0 #c4ced3'}),
+                                  'text-shadow' : '-1px -1px 0 #30ced8, 1px -1px 0 #30ced8, -1px 1px 0 #30ced8, 1px 1px 0 #30ced8'}),
                         
                         html.P([
                             html.P("Pitcher", style={'color' : 'white'}),
@@ -165,8 +165,8 @@ layout = html.Div([
                         style_cell={'textAlign': 'center'},
                         style_data_conditional=[ {
                                 'if': {'column_id': str(x), 'filter_query': '{{{0}}} > 25 && {{{0}}} < 100'.format(x)},
-                                'color': 'white',
-                                'backgroundColor' : darker
+                                'color': bright,
+                                'backgroundColor' : lighter
                             } for x in fin.columns.to_list()
                         ], style_table={'width': '95%'}),
                         
@@ -178,12 +178,12 @@ layout = html.Div([
                         style_cell={'textAlign': 'center'},
                         style_data_conditional=[ {
                                 'if': {'column_id': str(x), 'filter_query': '{{{0}}} > 25 && {{{0}}} < 100'.format(x)},
-                                'color': 'white',
-                                'backgroundColor' : darker
+                                'color': bright,
+                                'backgroundColor' : lighter
                             } for x in finR.columns.to_list()
                         ],
                         style_table={'width': '95%'})], className = "six columns")], className = "row")], style={
-                                                                    'backgroundColor' : lighter                   
+                                                                    'backgroundColor' : darker                   
                                                                     },className = "all")
                     
 ##                    html.Div([
