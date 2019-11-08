@@ -41,7 +41,7 @@ app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div(id='page-content')
 ])
-
+gc.collect()
 
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
@@ -115,3 +115,4 @@ gc.collect()
 
 if __name__ == '__main__':
     app.run_server(debug=True)
+    gc.collect()
