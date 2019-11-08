@@ -42,7 +42,7 @@ strike3 = [{'label' : '0', 'value' : '0.0'},            #increase num
 batter3 = [{'label' : 'Right', 'value' : 'R'},          #increase num
          {'label' : 'Left', 'value' : 'L'}]
 
-trace_1 = go.Histogram2d(x = df.px, y = df.pz, colorscale=teamColor)
+trace_1 = go.Histogram2d()
 
 layouts = go.Layout(height = 600,
                    width = 600)
