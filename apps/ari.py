@@ -95,7 +95,7 @@ layout = html.Div([
                                  'color': lighter,
                                   'text-align' : 'center',
                                   'height': '50px',
-                                  'text-shadow' : '-2px -2px 0 #30ced8, 2px -2px 0 #30ced8, -2px 2px 0 #30ced8, 2px 2px 0 #30ced8'}),
+                                  'text-shadow' : '-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff'}),
                         
                         html.P([
                             html.P("Pitcher", style={'color' : 'white'}),
