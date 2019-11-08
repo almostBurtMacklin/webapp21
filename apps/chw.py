@@ -213,7 +213,7 @@ layout = html.Div([
                 
 def update_figure(input1, input2, input3, input4, input5):
     
-   Final = df.query('pitcher_id == @input1 and pitch_type == @input2 and stand == @input5 and b_count == @input3 and s_count == @input4')
+    Final = df.query('pitcher_id == @input1 and pitch_type == @input2 and stand == @input5 and b_count == @input3 and s_count == @input4')
     try:
         trace_2 = go.Histogram2d(x = Final.px, y = Final.pz, colorscale=teamColor ,
                 reversescale = False)
