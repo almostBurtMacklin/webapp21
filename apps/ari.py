@@ -343,7 +343,9 @@ def update_table_Right(pitcher, value):
     [Input('opt', 'value')])
 def update_dropdown(input1):
     pitchTypes = df.query('pitcher_id == @input1').pitch_type.unique()
-    return [{'label' : j, 'value' : j} for j in pitchTypes], value = pitchTypes[0]['value']
+    opt = [{'label' : j, 'value' : j} for j in pitchTypes]
+    value = pitchTypes[0]['value']
+    return opt, value
     
 gc.collect()
 
