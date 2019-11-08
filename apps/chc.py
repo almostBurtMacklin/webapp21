@@ -22,9 +22,9 @@ teamColor = [[0, "#fff"],
                 [0.85, "#ec5349"],
                 [1, "#e8291c"]]
 
-darker = '#1d2d5c'
-lighter = '#134a8e'
-bright = '#e8291c'
+darker = '#0e3386'
+lighter = '#cc3433'
+bright = '#fff'
 
 features = df.pitcher_id.unique()
 pitches = df.pitch_type.unique()
@@ -89,10 +89,10 @@ layout = html.Div([
                         #html.Img(src='data:oriole/jpg;base64,{}'.format(encoded_image.decode()),style ={'width': '99%'}),
                         html.H1("Chicago Cubs Match Up Chart - Pitcher Tendencies",
                          style = {#'backgroundColor' : '#512888',
-                                 'color': '#e8291c',
+                                 'color': lighter,
                                   'text-align' : 'center',
                                   'height': '50px',
-                                  'text-shadow' : '-1px -1px 0 #c4ced3, 1px -1px 0 #c4ced3, -1px 1px 0 #c4ced3, 1px 1px 0 #c4ced3'}),
+                                  'text-shadow' : '-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff'}),
                         
                         html.P([
                             html.P("Pitcher", style={'color' : 'white'}),
@@ -163,7 +163,7 @@ layout = html.Div([
                         style_data_conditional=[ {
                                 'if': {'column_id': str(x), 'filter_query': '{{{0}}} > 25 && {{{0}}} < 100'.format(x)},
                                 'color': 'white',
-                                'backgroundColor' : darker
+                                'backgroundColor' : lighter
                             } for x in fin.columns.to_list()
                         ], style_table={'width': '95%'}),
                         
@@ -176,11 +176,11 @@ layout = html.Div([
                         style_data_conditional=[ {
                                 'if': {'column_id': str(x), 'filter_query': '{{{0}}} > 25 && {{{0}}} < 100'.format(x)},
                                 'color': 'white',
-                                'backgroundColor' : darker
+                                'backgroundColor' : lighter
                             } for x in finR.columns.to_list()
                         ],
                         style_table={'width': '95%'})], className = "six columns")], className = "row")], style={
-                                                                    'backgroundColor' : lighter                   
+                                                                    'backgroundColor' : darker                   
                                                                     },className = "all")
                     
 ##                    html.Div([
