@@ -83,7 +83,7 @@ fin = counts(s,b,'L',  opts[0]['value'] )
 finR = counts(s,b,'R', opts[0]['value'])
 #image_filename = 'oriole.jpg' # replace with your own image
 #encoded_image = base64.b64encode(open(image_filename, 'rb').read())
-
+gc.collect()
 layout = html.Div([
                 #common.get_header(),
                 common.get_menu(),
@@ -258,6 +258,7 @@ def update_figure(input1, input2, input3, input4, input5):
                 line=dict(
                     color="Black",
                 ))])
+        gc.collect()
         return fig
     except AttributeError:
         trace_2 = go.Histogram2d(x = df1.px, y = df1.pz, colorscale = 'Blues',reversescale = True)
@@ -305,7 +306,7 @@ def update_table_Left(pitcher, value):
             j += 1
         i += 1
     
-    
+    gc.collect()
     return final.to_dict('records')
 @app.callback(
     Output('tableari1', 'data'),       #increase num
@@ -335,7 +336,7 @@ def update_table_Right(pitcher, value):
             j += 1
         i += 1
     
-    
+    gc.collect()
     return final.to_dict('records')
 @app.callback(
     Output('pitchari', 'options'),        #increase num
