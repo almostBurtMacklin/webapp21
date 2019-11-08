@@ -16,7 +16,7 @@ import dash_bootstrap_components as dbc
 df = pd.read_csv('data/cle.csv', dtype={'b_count': 'category', 's_count' : 'category', 'pitcher_id' : 'category', 'pitch_type' : 'category', 'stand': 'category' })
 
 teamColor = [[0, "#fff"],
-                [0.25, "#f9d17"],
+                [0.25, "#f9d1d7"],
                 [0.45, "#f3a3af"],
                 [0.65, "#ee7587"],
                 [0.85, "#e8475f"],
