@@ -16,11 +16,11 @@ import dash_bootstrap_components as dbc
 df = pd.read_csv('data/atl.csv',dtype={'b_count': 'category', 's_count' : 'category', 'pitcher_id' : 'category', 'pitch_type' : 'category', 'stand': 'category' })
 
 teamColor = [[0, "#fff"],
-                [0.25, "#faeecc"],
-                [0.45, "#f6dd99"],
-                [0.65, "#f2cc66"],
-                [0.85, "#eebb33"],
-                [1, "#eaaa00"]]
+                [0.25, "#f5cfd9"],
+                [0.45, "#eb9fb3"],
+                [0.65, "#e1708d"],
+                [0.85, "#d74067"],
+                [1, "#ce1141"]]
 
 darker = '#13274f'
 lighter = '#CE1141'
@@ -162,8 +162,8 @@ layout = html.Div([
                         style_cell={'textAlign': 'center'},
                         style_data_conditional=[ {
                                 'if': {'column_id': str(x), 'filter_query': '{{{0}}} > 25 && {{{0}}} < 100'.format(x)},
-                                'color': lighter,
-                                'backgroundColor' : bright
+                                'color': bright,
+                                'backgroundColor' : lighter
                             } for x in fin.columns.to_list()
                         ], style_table={'width': '95%'}),
                         
@@ -175,8 +175,8 @@ layout = html.Div([
                         style_cell={'textAlign': 'center'},
                         style_data_conditional=[ {
                                 'if': {'column_id': str(x), 'filter_query': '{{{0}}} > 25 && {{{0}}} < 100'.format(x)},
-                                'color': lighter,
-                                'backgroundColor' : bright
+                                'color': bright,
+                                'backgroundColor' : lighter
                             } for x in finR.columns.to_list()
                         ],
                         style_table={'width': '95%'})], className = "six columns")], className = "row")], style={
