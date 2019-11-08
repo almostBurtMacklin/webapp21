@@ -92,7 +92,7 @@ layout = html.Div([
                         #html.Img(src='data:oriole/jpg;base64,{}'.format(encoded_image.decode()),style ={'width': '99%'}),
                         html.H1("Arizona Diamondbacks Match Up Chart - Pitcher Tendencies",
                          style = {#'backgroundColor' : '#512888',
-                                 'color': darker,
+                                 'color': lighter,
                                   'text-align' : 'center',
                                   'height': '50px',
                                   'text-shadow' : '-1px -1px 0 #30ced8, 1px -1px 0 #30ced8, -1px 1px 0 #30ced8, 1px 1px 0 #30ced8'}),
@@ -343,8 +343,7 @@ def update_table_Right(pitcher, value):
     [Input('opt', 'value')])
 def update_dropdown(input1):
     pitchTypes = df.query('pitcher_id == @input1').pitch_type.unique()
-    opt = [{'label' : j, 'value' : j} for j in pitchTypes]
-    return opt
+    return [{'label' : j, 'value' : j} for j in pitchTypes]
     
 gc.collect()
 
