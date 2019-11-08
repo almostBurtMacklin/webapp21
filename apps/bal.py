@@ -15,12 +15,12 @@ import dash_bootstrap_components as dbc
 
 df = pd.read_csv('data/bal.csv', dtype={'b_count': 'category', 's_count' : 'category', 'pitcher_id' : 'category', 'pitch_type' : 'category', 'stand': 'category' })
 
-teamColor = [[0, "rgb(255,255,255)"],
-                [0.25, "rgb(248.4,218,204)"],
-                [0.45, "rgb(241.8,181,153)"],
-                [0.65, "rgb(235.2,144,102)"],
-                [0.85, "rgb(228.6,107,51)"],
-                [1, "rgb(222,70,0)"]]
+teamColor = [[0, "#fff"],
+                [0.25, "#ccc"],
+                [0.45, "#999"],
+                [0.65, "#666"],
+                [0.85, "#333"],
+                [1, "#000"]]
 
 features = df.pitcher_id.unique()
 pitches = df.pitch_type.unique()
