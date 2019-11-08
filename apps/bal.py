@@ -38,7 +38,7 @@ strike1 = [{'label' : '0', 'value' : '0.0'},            #increase num
 batter1 = [{'label' : 'Right', 'value' : 'R'},          #increase num
          {'label' : 'Left', 'value' : 'L'}]
 
-trace_1 = go.Histogram2d(x = df.px, y = df.pz, colorscale=teamColor)
+trace_1 = go.Histogram2d()
 
 layouts = go.Layout(height = 600,
                    width = 600)
@@ -341,6 +341,7 @@ def update_dropdown(input1):
 
 if __name__ == '__main__':
     app.run_server(debug=True)
+    gc.collect()
 
 
 
