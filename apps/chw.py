@@ -16,15 +16,15 @@ import dash_bootstrap_components as dbc
 df = pd.read_csv('data/chw.csv', dtype={'b_count': 'category', 's_count' : 'category', 'pitcher_id' : 'category', 'pitch_type' : 'category', 'stand': 'category' })
 
 teamColor = [[0, "#fff"],
-                [0.25, "#f4d4d1"],
-                [0.45, "#f5a9a4"],
-                [0.65, "#f17e76"],
-                [0.85, "#ec5349"],
-                [1, "#e8291c"]]
+                [0.25, "#ccc"],
+                [0.45, "#999"],
+                [0.65, "#666"],
+                [0.85, "#333"],
+                [1, "#000"]]
 
-darker = '#1d2d5c'
-lighter = '#134a8e'
-bright = '#e8291c'
+darker = '#000000'
+lighter = '#C4CEd4'
+bright = '#fffc'
 
 features = df.pitcher_id.unique()
 pitches = df.pitch_type.unique()
@@ -76,11 +76,12 @@ def counts(s,b,hand,pitcher):
     return final
 b = ['0.0','1.0','2.0','3.0']
 s = ['0.0','1.0','2.0']
-fin = counts(s,b,'L',  opts[0]['value'] )
-finR = counts(s,b,'R', opts[0]['value'])
+#fin = counts(s,b,'L',  opts[0]['value'] )
+#finR = counts(s,b,'R', opts[0]['value'])
 #image_filename = 'oriole.jpg' # replace with your own image
 #encoded_image = base64.b64encode(open(image_filename, 'rb').read())
-
+fin = []
+finR = []
 layout = html.Div([
                 #common.get_header(),
                 common.get_menu(),
@@ -89,10 +90,10 @@ layout = html.Div([
                         #html.Img(src='data:oriole/jpg;base64,{}'.format(encoded_image.decode()),style ={'width': '99%'}),
                         html.H1("Chicago White Sox Match Up Chart - Pitcher Tendencies",
                          style = {#'backgroundColor' : '#512888',
-                                 'color': '#e8291c',
+                                 'color': bright,
                                   'text-align' : 'center',
                                   'height': '50px',
-                                  'text-shadow' : '-1px -1px 0 #c4ced3, 1px -1px 0 #c4ced3, -1px 1px 0 #c4ced3, 1px 1px 0 #c4ced3'}),
+                                  'text-shadow' : '-1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff'}),
                         
                         html.P([
                             html.P("Pitcher", style={'color' : 'white'}),
@@ -154,7 +155,7 @@ layout = html.Div([
                                                                     }, className = "six columns"),
                     
                     html.Div([
-                        html.H3('vs Left Handed Hitters', style={'color' : 'white'}),
+                        html.H3('vs Left Handed Hitters', style={'color' : darker}),
                         dash_table.DataTable(
                         id='tablechw',        #increase num
                         columns=[{"name": i, "id": i} for i in fin.columns],
@@ -162,7 +163,7 @@ layout = html.Div([
                         style_cell={'textAlign': 'center'},
                         style_data_conditional=[ {
                                 'if': {'column_id': str(x), 'filter_query': '{{{0}}} > 25 && {{{0}}} < 100'.format(x)},
-                                'color': 'white',
+                                'color': bright,
                                 'backgroundColor' : darker
                             } for x in fin.columns.to_list()
                         ], style_table={'width': '95%'}),
@@ -212,32 +213,14 @@ layout = html.Div([
                 
 def update_figure(input1, input2, input3, input4, input5):
     
-    Final = pd.DataFrame()
-    df11 = pd.DataFrame()
-    df12 = pd.DataFrame()
-    df13 = pd.DataFrame()
-    df14 = pd.DataFrame()
-    df1 = df.query('pitcher_id == @input1')
-    df2 = df1.query('pitch_type == @input2')
-    df11 = df11.append(df2)
-    #for l in input5:
-    df3 = df11.query('stand == @input5')
-    df12 = df12.append(df3)
-    #for j in input4:    
-    df4 = df12.query('b_count == @input3')
-    df13 = df13.append(df4)
-    #for k in input3:    
-    df5 = df13.query('s_count == @input4')
-    Final = Final.append(df5)
-    
-    print(Final.shape)
+   Final = df.query('pitcher_id == @input1 and pitch_type == @input2 and stand == @input5 and b_count == @input3 and s_count == @input4')
     try:
         trace_2 = go.Histogram2d(x = Final.px, y = Final.pz, colorscale=teamColor ,
                 reversescale = False)
         fig = go.Figure(data = [trace_2], layout = layouts)
         fig.layout.update(
             title = go.layout.Title(
-                text = "View From Catcher's Viewpoint"),
+                text = "Catcher's Viewpoint"),
             xaxis = go.layout.XAxis(
                 title=go.layout.xaxis.Title(
                 text="Distance From Center of Home Plate (in feet)")),
