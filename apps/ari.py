@@ -165,7 +165,7 @@ layout = html.Div([
                         style_cell={'textAlign': 'center'},
                         style_data_conditional=[ {
                                 'if': {'column_id': str(x), 'filter_query': '{{{0}}} > 25 && {{{0}}} < 100'.format(x)},
-                                'color': bright,
+                                'color': darker,
                                 'backgroundColor' : lighter
                             } for x in fin.columns.to_list()
                         ], style_table={'width': '95%'}),
@@ -178,7 +178,7 @@ layout = html.Div([
                         style_cell={'textAlign': 'center'},
                         style_data_conditional=[ {
                                 'if': {'column_id': str(x), 'filter_query': '{{{0}}} > 25 && {{{0}}} < 100'.format(x)},
-                                'color': bright,
+                                'color': darker,
                                 'backgroundColor' : lighter
                             } for x in finR.columns.to_list()
                         ],
