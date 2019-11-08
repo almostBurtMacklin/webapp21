@@ -6,12 +6,12 @@ from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 from app import app
 from apps import pitch
-#from apps import bal
-#from apps import nyy
-#from apps import tbr
-#from apps import bos
-#from apps import tor
-#from apps import mins
+from apps import bal
+from apps import nyy
+from apps import tbr
+from apps import bos
+from apps import tor
+from apps import mins
 #from apps import cle
 #from apps import chw
 #from apps import kcr
@@ -27,7 +27,7 @@ from apps import pitch
 #from apps import nym
 #from apps import mia
 #from apps import stl
-#from apps import mil
+from apps import mil
 #from apps import chc
 #from apps import cin
 #from apps import pit
@@ -35,7 +35,7 @@ from apps import pitch
 #from apps import sdp
 #from apps import sfg
 from apps import ari
-from apps import col
+#from apps import col
 
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
