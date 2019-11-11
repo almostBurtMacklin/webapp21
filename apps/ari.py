@@ -15,7 +15,7 @@ import dash_bootstrap_components as dbc
 from apps import common
 from app import app
 
-df = pd.read_csv('data/ari.csv', dtype={'b_count': str, 's_count' : str})
+df = pd.read_csv('data/ari.csv', dtype={'b_count': 'category', 's_count' : 'category', 'pitcher_id' : 'category', 'pitch_type' : 'category', 'stand': 'category' })
 
 teamColor = [[0, "#fff"],
                 [0.25, "#d5f5f7"],
@@ -29,7 +29,6 @@ lighter = '#E3D4Ad'
 bright = '#30Ced8'
 
 features = df.pitcher_id.unique()
-features.sort()
 pitches = df.pitch_type.unique()
 opts = [{'label' : i, 'value' : i} for i in features]
 tops = [{'label' : j, 'value' : j} for j in pitches]
@@ -215,30 +214,12 @@ layout = html.Div([
                 
 def update_figure(input1, input2, input3, input4, input5):
     
-    Final = pd.DataFrame()
-    df11 = pd.DataFrame()
-    df12 = pd.DataFrame()
-    df13 = pd.DataFrame()
-    df14 = pd.DataFrame()
-    df1 = df.query('pitcher_id == @input1')
-    df2 = df1.query('pitch_type == @input2')
-    df11 = df11.append(df2)
-    #for l in input5:
-    df3 = df11.query('stand == @input5')
-    df12 = df12.append(df3)
-    #for j in input4:    
-    df4 = df12.query('b_count == @input3')
-    df13 = df13.append(df4)
-    #for k in input3:    
-    df5 = df13.query('s_count == @input4')
-    Final = Final.append(df5)
+    Final = df.query('pitcher_id == @input1 and pitch_type == @input2 and stand == @input5 and b_count == @input3 and s_count == @input4')
     
-    print(Final.shape)
-    try:
-        trace_2 = go.Histogram2d(x = Final.px, y = Final.pz, colorscale=teamColor ,
+    trace_2 = go.Histogram2d(x = Final.px, y = Final.pz, colorscale=teamColor ,
                 reversescale = False)
-        fig = go.Figure(data = [trace_2], layout = layouts)
-        fig.layout.update(
+    fig = go.Figure(data = [trace_2], layout = layouts)
+    fig.layout.update(
             title = go.layout.Title(
                 text = "View From Catcher's Viewpoint"),
             xaxis = go.layout.XAxis(
@@ -258,25 +239,9 @@ def update_figure(input1, input2, input3, input4, input5):
                 line=dict(
                     color="Black",
                 ))])
-        gc.collect()
-        return fig
-    except AttributeError:
-        trace_2 = go.Histogram2d(x = df1.px, y = df1.pz, colorscale = 'Blues',reversescale = True)
-        fig = go.Figure(data = [trace_2], layout = layouts)
-        fig.layout.update(
-        shapes=[
-            # unfilled Rectangle
-            go.layout.Shape(
-                type="rect",
-                x0=-.7083,
-                y0=1.56,
-                x1=.7083,
-                y1=3.435,
-                line=dict(
-                    color="Black",
-                ))])
-        
-        return fig1     #increase num
+     gc.collect()
+     return fig
+
 
 @app.callback(
     Output('tableari', 'data'),       #increase num
