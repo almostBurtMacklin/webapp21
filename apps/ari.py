@@ -239,8 +239,8 @@ def update_figure(input1, input2, input3, input4, input5):
                 line=dict(
                     color="Black",
                 ))])
-     gc.collect()
-     return fig
+    gc.collect()
+    return fig
 
 
 @app.callback(
